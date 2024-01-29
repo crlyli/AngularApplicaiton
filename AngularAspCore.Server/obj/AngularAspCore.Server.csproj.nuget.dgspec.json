@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\crystal lyliston\\source\\repos\\AngularAspCore\\AngularAspCore.Server\\AngularAspCore.Server.csproj": {}
+    "C:\\Users\\crystal lyliston\\src\\AngularApplicaiton\\AngularAspCore.Server\\AngularAspCore.Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\crystal lyliston\\source\\repos\\AngularAspCore\\AngularAspCore.Server\\AngularAspCore.Server.csproj": {
+    "C:\\Users\\crystal lyliston\\src\\AngularApplicaiton\\AngularAspCore.Server\\AngularAspCore.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\crystal lyliston\\source\\repos\\AngularAspCore\\AngularAspCore.Server\\AngularAspCore.Server.csproj",
+        "projectUniqueName": "C:\\Users\\crystal lyliston\\src\\AngularApplicaiton\\AngularAspCore.Server\\AngularAspCore.Server.csproj",
         "projectName": "AngularAspCore.Server",
-        "projectPath": "C:\\Users\\crystal lyliston\\source\\repos\\AngularAspCore\\AngularAspCore.Server\\AngularAspCore.Server.csproj",
+        "projectPath": "C:\\Users\\crystal lyliston\\src\\AngularApplicaiton\\AngularAspCore.Server\\AngularAspCore.Server.csproj",
         "packagesPath": "C:\\Users\\crystal lyliston\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\crystal lyliston\\source\\repos\\AngularAspCore\\AngularAspCore.Server\\obj\\",
+        "outputPath": "C:\\Users\\crystal lyliston\\src\\AngularApplicaiton\\AngularAspCore.Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\crystal lyliston\\AppData\\Roaming\\NuGet\\NuGet.Config",

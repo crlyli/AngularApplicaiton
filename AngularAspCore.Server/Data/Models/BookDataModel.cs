@@ -1,6 +1,6 @@
-﻿namespace AngularAspCore.Server.Data.Models.Domain
+﻿namespace AngularAspCore.Server.Data.Models
 {
-    public class BookData
+    public class BookDataModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -8,6 +8,6 @@
         public string Author { get; set; }
         public double Rate { get; set; }
         public DateTime? DateStart { get; set; }
-        public DateTime? DateRead { get; set; }
+        public DateTime? DateFinish { get; set; }
     }
 }

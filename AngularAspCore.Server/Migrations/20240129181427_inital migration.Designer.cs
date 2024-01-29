@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AngularAspCore.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240125164156_check")]
-    partial class check
+    [Migration("20240129181427_inital migration")]
+    partial class initalmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace AngularAspCore.Server.Migrations
                 .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("AngularAspCore.Server.Data.Models.Domain.BookData", b =>
+            modelBuilder.Entity("AngularAspCore.Server.Data.Models.BookDataModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -31,7 +31,7 @@ namespace AngularAspCore.Server.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime?>("DateRead")
+                    b.Property<DateTime?>("DateFinish")
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DateStart")

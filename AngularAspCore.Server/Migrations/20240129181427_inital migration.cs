@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AngularAspCore.Server.Migrations
 {
-    public partial class check : Migration
+    public partial class initalmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,7 +27,7 @@ namespace AngularAspCore.Server.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Rate = table.Column<double>(type: "double", nullable: false),
                     DateStart = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    DateRead = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                    DateFinish = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
