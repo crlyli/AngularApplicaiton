@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AddBookRequest } from 'src/app/model/add-book-reqeust.model';
+import { Observable, catchError } from 'rxjs';
+import { BookDataModel } from 'src/app/model/book.model';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -13,11 +13,17 @@ export class PostService {
   }
 
   apiBaseUrl = environment.apiBaseUrl;
-  getPosts(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiBaseUrl}/controller/books`);
-}
-addBook(model: AddBookRequest): Observable<void> {
-  debugger;
+  bookdata = []
+  getBooks(): Observable<BookDataModel[]> {
+    return this.http.get<any[]>(`${this.apiBaseUrl}/Books`)
+  };
+
+  addBook(model: BookDataModel): Observable<void> {
   return this.http.post<void>(`${this.apiBaseUrl}/Books`, model)
-  }
+  };
+  
+  deleteBook(id:string): Observable<void> {
+    return this.http.delete<void>(`${this.apiBaseUrl}/Books` + `/` + id)
+    };
+
 }

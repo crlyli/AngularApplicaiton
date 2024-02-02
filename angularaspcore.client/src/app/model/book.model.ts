@@ -1,4 +1,4 @@
-export interface AddBookRequest {
+export interface BookDataModel {
     id:number;
     title:string;
     description :string;

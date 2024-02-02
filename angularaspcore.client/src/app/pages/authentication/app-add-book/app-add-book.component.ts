@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/services/api-service/book.service';
-import { AddBookRequest } from 'src/app/model/add-book-reqeust.model';
+import { BookDataModel } from 'src/app/model/book.model';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -10,10 +10,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./app-add-book.component.scss']
 })
 export class AppAddBookComponent implements OnDestroy{
-  model : AddBookRequest;
+  model : BookDataModel;
   private addBookSubscription?: Subscription;
   posts: any[];
-  constructor(private router: Router, private postService: PostService) {
+  constructor(private postService: PostService, private router: Router) {
     this.model =
     {
       id:0,
@@ -25,15 +25,17 @@ export class AppAddBookComponent implements OnDestroy{
       dateFinish : new Date().toDateString()
     }
   }
-  
+
   onFormSubmit()
   { 
     this.addBookSubscription = this.postService.addBook(this.model)
       .subscribe({
         next: (response) => {
           console.log('This was successful!')
+          this.router.navigate(['/dashboard']);
         },
         error: (error) => {
+          console.log(error.error)
         }
       })
   }

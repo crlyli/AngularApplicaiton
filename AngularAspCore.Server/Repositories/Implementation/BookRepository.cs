@@ -5,6 +5,7 @@ using AngularAspCore.Server.Repositories.Interface;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AngularAspCore.Server.Repositories.Implementation
 {
@@ -18,7 +19,6 @@ namespace AngularAspCore.Server.Repositories.Implementation
         }
         public async Task<BookDataModel> CreateAsync(BookDto bookData)
         {
-            //new BookData
             var fModel = ConvertToDataModel(bookData);
             await _mDbContext.AddAsync(fModel);
             await _mDbContext.SaveChangesAsync();
@@ -26,28 +26,22 @@ namespace AngularAspCore.Server.Repositories.Implementation
         }
         public Task<List<BookDataModel>> GetBooks()
         {
-            return _mDbContext.BookData.ToListAsync();
+            return _mDbContext.BookData.Where(aBook => aBook.Title != string.Empty).ToListAsync();
         }
+
         public async Task<List<BookDataModel>> GetBooksById(int fId)
         {
             IQueryable<BookDataModel> GetItems = _mDbContext.BookData;
             return await GetItems.Where(book => book.Id == fId).ToListAsync();
 
         }
-        public async Task<ActionResult<BookDataModel>> UpdateBookById(int fId, BookDataModel model)
+        public async Task<ActionResult<BookDataModel>> UpdateBookById(int fId, BookDto model)
         {
+            var fConvert = ConvertToDataModel(model);
+            _mDbContext.BookData.Update(fConvert);
+            await _mDbContext.SaveChangesAsync();
             var fExist = await _mDbContext.BookData.FindAsync(fId);
-            if (fExist is not null)
-            {
-                fExist.Title = model.Title;
-                fExist.Description = model.Description;
-                fExist.Author = model.Author;
-                fExist.Rate = model.Rate;
-                fExist.DateFinish = model.DateFinish;
-                fExist.DateStart = model.DateStart;
 
-                await _mDbContext.SaveChangesAsync();
-            }
             return fExist;
         }
         public BookDataModel ConvertToDataModel(BookDto bookDto)
@@ -57,11 +51,23 @@ namespace AngularAspCore.Server.Repositories.Implementation
             bookData.Description = bookDto.Description;
             bookData.Author = bookDto.Author;
             bookData.Rate = bookDto.Rate;
-            bookData.DateStart = DateTime.Parse(bookDto.DateStart);
-            bookData.DateFinish = DateTime.Parse(bookDto.DateFinish);
+            bookData.DateStart = string.IsNullOrEmpty(bookDto.DateStart) ? null : DateTime.Parse(bookDto.DateStart); DateTime.Parse(bookDto.DateStart);
+            bookData.DateFinish = string.IsNullOrEmpty(bookDto.DateFinish) ? null : DateTime.Parse(bookDto.DateFinish); ;
             
             return bookData;
             
+        }
+        public async Task<bool> DeleteBook(int fId)
+        {
+            var fBook = _mDbContext.BookData.Where(book => book.Id == fId).FirstOrDefault();
+
+            if(fBook != null)
+            {
+                _mDbContext.Remove(fBook);
+                await _mDbContext.SaveChangesAsync();
+                return true;
+            }
+            return false;
         }
         //public ActionResult<Thing> Get(int id) =>     GetThingFromDB() ?? NotFound();
     }
