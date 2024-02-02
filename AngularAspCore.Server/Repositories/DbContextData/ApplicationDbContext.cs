@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using AngularAspCore.Server.Data.Models;
+using AngularAspCore.Server.Data.Models.Domain;
 
 namespace AngularAspCore.Server.Repositories.DbContextData
 {
@@ -9,6 +9,6 @@ namespace AngularAspCore.Server.Repositories.DbContextData
         {
 
         }
-        public DbSet<BookDataModel> BookData { get; set; }
+        public DbSet<BookData> BookData { get; set; }
     }
 }

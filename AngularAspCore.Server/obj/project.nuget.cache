@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IwynS68ltP5a/Dmsk2+HlScLjN+UbRKgryZwErm5V0g2dvmuAQzeTGVrv+NaQeV6/cDMmthIt+YIiux+ed2X6g==",
+  "dgSpecHash": "mzdrl1x0mDCkYGq4qV3O7msL5+QvEaX9P2wnr1/wZ+5HRuJpb5+IzHjbdiS53gedJvWjAC3Cm1k10NnLBi6tug==",
   "success": true,
-  "projectFilePath": "C:\\Users\\crystal lyliston\\src\\AngularApplicaiton\\AngularAspCore.Server\\AngularAspCore.Server.csproj",
+  "projectFilePath": "C:\\Users\\crystal lyliston\\source\\repos\\AngularAspCore\\AngularAspCore.Server\\AngularAspCore.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\crystal lyliston\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\crystal lyliston\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.10\\microsoft.entityframeworkcore.6.0.10.nupkg.sha512",

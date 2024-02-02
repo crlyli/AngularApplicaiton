@@ -1,17 +1,17 @@
-﻿
-using AngularAspCore.Server.Data.Models;
+﻿using AngularAspCore.Server.Data.Models;
+using AngularAspCore.Server.Data.Models.Domain;
 using AngularAspCore.Server.Data.Models.Dto;
+using AngularAspCore.Server.Data.Services;
 using AngularAspCore.Server.Repositories.DbContextData;
 using AngularAspCore.Server.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AngularAspCore.Server.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    [Route("api/controller")]
     public class BooksController : Controller
     {
-
+        private readonly IBookService _bookService;
         private readonly IBookRepository _bookRepository;
         public BooksController(IBookRepository bookRepository)
         {
@@ -19,53 +19,38 @@ namespace AngularAspCore.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBookAsync([FromBody] BookDto modeldata)
+        public async Task<IActionResult> AddBookAsync(CreateBookDto request)
         {
             //Map dto to Domain Model
-            if (modeldata is null)
+            var book = new BookData()
             {
-                //_logger.LogError("Owner object sent from client is null.");
-                return BadRequest("Owner object is null");
-            }
+                Title = request.Title,
+                Description = request.Description,
+                Author = request.Author,
+                Rate = request.Rate,
+                DateStart = request.DateStart,
+                DateRead = request.DateRead
+            };
+            await _bookRepository.CreateAsync(book);
 
-            await _bookRepository.CreateAsync(modeldata);
-
-
-            return Ok(modeldata);
+            var domainModel = new BookDto()
+            {
+                Id = book.Id,
+                Title = book.Title,
+                Description = book.Description,
+                Author = book.Author,
+                Rate = book.Rate,
+                DateStart = book.DateStart,
+                DateRead = book.DateRead
+            };
+            return Ok(domainModel);
         }
 
-        [HttpGet]
+        [HttpGet("[action]")]
         public async Task<IActionResult> GetBooksAsync()
         {
-            var allBooks = await _bookRepository.GetBooks();
-            return Ok(allBooks);
-        }
-        [HttpDelete("{id:int}")]
-        public async Task<IActionResult> DeleteBookAsync(int id)
-        {
-            try
-            {
-                var book = await _bookRepository.DeleteBook(id);
-
-                return book == false ? NotFound($"Book with Id = {id} not found") : Ok();
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error deleting data");
-            }
-        }
-
-        [HttpPatch]
-        [Route("{id:int}")]
-        public async Task<IActionResult> GetBookByIdAsync(int fId, [FromBody] BookDto modeldata)
-        {
-            var allBooks = await _bookRepository.UpdateBookById(fId, modeldata);
-            if (allBooks == null)
-                return BadRequest();
-
+            var allBooks = _bookService.GetAllBooks();
             return Ok(allBooks);
         }
     }
 }
-
