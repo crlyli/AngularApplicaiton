@@ -1,6 +1,6 @@
-﻿namespace AngularAspCore.Server.Data.Models.Dto
+﻿namespace AngularAspCore.Server.Data.Models.Domain
 {
-    public class BookDto
+    public class BookData
     {
         public int Id { get; set; }
         public string Title { get; set; }
