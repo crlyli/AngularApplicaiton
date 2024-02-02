@@ -1,0 +1,46 @@
+<div class="blank-layout-container justify-content-center align-items-center bg-light-primary">
+    <div class="position-relative row w-100 h-100 bg-gredient justify-content-center">
+        <div class="col-lg-4 d-flex align-items-center">
+            <mat-card class="cardWithShadow boxed-auth">
+                <mat-card-content class="p-32">
+
+                    <h1>Add New Book</h1>
+                    <form class="m-t-30" #form="ngForm">
+                        <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Book Title:</mat-label>
+                        <mat-form-field appearance="outline" class="w-100" color="primary">
+                            <input matInput name="title" [(ngModel)]="model.title"/>
+                        </mat-form-field>
+                        <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Book Author:</mat-label>
+                        <mat-form-field appearance="outline" class="w-100" color="primary">
+                            <input matInput name="author" [(ngModel)]="model.author"/>
+                        </mat-form-field>
+                        <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Book Description:</mat-label>
+                        <mat-form-field appearance="outline" class="w-100" color="primary">
+                            <input matInput name="description" [(ngModel)]="model.description"/>
+                        </mat-form-field>
+                        <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Rating:</mat-label>
+                        <mat-form-field appearance="outline" class="w-100" color="primary">
+                            <input type="number"  step=0.1  matInput name="rating" [(ngModel)]="model.rate"/>
+                        </mat-form-field>
+                        <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Started Reading:</mat-label>
+                        <mat-form-field appearance="outline" class="w-100" color="primary">
+                            <input matInput [matDatepicker]="startpicker" name="startdate" [(ngModel)]="model.dateStart">
+                            <mat-datepicker-toggle matIconSuffix [for]="startpicker"></mat-datepicker-toggle>
+                            <mat-datepicker #startpicker></mat-datepicker>
+                        </mat-form-field>
+                        <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Ended Reading:</mat-label>
+                        <mat-form-field appearance="outline" class="w-100" color="primary">
+                            <input matInput [matDatepicker]="picker" name="enddate" [(ngModel)]="model.dateFinish">
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        <a mat-flat-button color="primary" class="w-100" (click)="onFormSubmit()">
+                            Create Book
+                        </a>
+                        <!-- input -->
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

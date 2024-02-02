@@ -1,9 +1,8 @@
-using AngularAspCore.Server.Data;
-using AngularAspCore.Server.Data.Services;
-using AngularAspCore.Server.Repositories.DbContextData;
-using AngularAspCore.Server.Repositories.Implementation;
-using AngularAspCore.Server.Repositories.Interface;
+using AngularAspCore.Database.Repositories.DbContextData;
+using AngularAspCore.Database.Repositories.Implementation;
+using AngularAspCore.Database.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Pomelo.EntityFrameworkCore.MySql;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,15 +30,20 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<IBookService, BookService>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
-builder.Services.AddSingleton<IData, Data>();
 // Replace with your connection string.
 
 
 var app = builder.Build();
 
 app.UseDefaultFiles();
+app.UseCors(options =>
+{
+    options.AllowAnyHeader();
+    options.AllowAnyOrigin();
+    options.AllowAnyMethod();
+});
+
 app.UseStaticFiles();
 
 // Configure the HTTP request pipeline.
