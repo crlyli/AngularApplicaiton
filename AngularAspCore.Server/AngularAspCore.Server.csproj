@@ -29,6 +29,7 @@
     <ProjectReference Include="..\angularaspcore.client\angularaspcore.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\AngularAspCore.Database\AngularAspCore.Database.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,10 +45,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

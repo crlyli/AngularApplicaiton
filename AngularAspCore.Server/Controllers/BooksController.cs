@@ -1,8 +1,8 @@
 ﻿
-using AngularAspCore.Server.Data.Models;
-using AngularAspCore.Server.Data.Models.Dto;
-using AngularAspCore.Server.Repositories.DbContextData;
-using AngularAspCore.Server.Repositories.Interface;
+using AngularAspCore.Database.Data.Models;
+using AngularAspCore.Database.Data.Models.Dto;
+using AngularAspCore.Database.Repositories.DbContextData;
+using AngularAspCore.Database.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AngularAspCore.Server.Controllers

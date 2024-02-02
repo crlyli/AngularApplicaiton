@@ -1,6 +1,6 @@
-using AngularAspCore.Server.Repositories.DbContextData;
-using AngularAspCore.Server.Repositories.Implementation;
-using AngularAspCore.Server.Repositories.Interface;
+using AngularAspCore.Database.Repositories.DbContextData;
+using AngularAspCore.Database.Repositories.Implementation;
+using AngularAspCore.Database.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Pomelo.EntityFrameworkCore.MySql;
