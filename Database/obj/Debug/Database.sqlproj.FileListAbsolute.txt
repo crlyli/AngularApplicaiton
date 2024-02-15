@@ -1,6 +1,0 @@
-C:\Users\crystal lyliston\source\repos\AngularAspCore\Database\bin\Debug\Database.dacpac
-C:\Users\crystal lyliston\source\repos\AngularAspCore\Database\bin\Debug\Database.dll
-C:\Users\crystal lyliston\source\repos\AngularAspCore\Database\bin\Debug\Database.pdb
-C:\Users\crystal lyliston\source\repos\AngularAspCore\Database\obj\Debug\Database.sqlproj.AssemblyReference.cache
-C:\Users\crystal lyliston\source\repos\AngularAspCore\Database\obj\Debug\Database.dll
-C:\Users\crystal lyliston\source\repos\AngularAspCore\Database\obj\Debug\Database.pdb
