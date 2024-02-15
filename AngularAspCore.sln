@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngularAspCore.Server", "An
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "angularaspcore.client", "angularaspcore.client\angularaspcore.client.esproj", "{98705DC4-14A8-4E7F-B112-710511DACAA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularAspCore.Database", "AngularAspCore.Database\AngularAspCore.Database.csproj", "{4A03B2F9-12F2-47AB-9DE6-69B69D5BE19F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngularAspCore.Database", "AngularAspCore.Database\AngularAspCore.Database.csproj", "{4A03B2F9-12F2-47AB-9DE6-69B69D5BE19F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

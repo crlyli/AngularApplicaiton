@@ -1,9 +1,8 @@
+using AngularAspCore.Database;
 using AngularAspCore.Database.Repositories.DbContextData;
 using AngularAspCore.Database.Repositories.Implementation;
 using AngularAspCore.Database.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Pomelo.EntityFrameworkCore.MySql;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +29,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IRepositoryWraper, RepositoryWrapper>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<IReaderRepository, ReaderRepository>();
+builder.Services.AddScoped<IReadingLogRepository, ReadingLogRepository>();
 // Replace with your connection string.
 
 

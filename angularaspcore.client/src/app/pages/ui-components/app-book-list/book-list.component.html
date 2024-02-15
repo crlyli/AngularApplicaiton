@@ -19,9 +19,6 @@
                 <p class="mat-subtitle-2 f-w-600 p-16 bg-light-primary rounded">
                   Title: {{bookDetails.selectedOptions.selected[0].value.title}}<br>
                   Author: {{bookDetails.selectedOptions.selected[0].value.author}}<br>
-                  Started Reading:{{bookDetails.selectedOptions.selected[0].value.dateStart | date:'MM-dd-yyyy'}}<br>
-                  Ended Reading: {{bookDetails.selectedOptions.selected[0].value.dateFinish | date:'MM-dd-yyyy'}}<br> 
-                  Rating: {{bookDetails.selectedOptions.selected[0].value.rate}}<br>
                   Description:<br>
                   {{bookDetails.selectedOptions.selected[0].value.description}}<br>
                 </p>
@@ -29,10 +26,10 @@
                   <a mat-flat-button color="primary" class="w-50" (click)="OnDeleteSelected(bookDetails.selectedOptions.selected[0].value.id)">
                     Delete Book
                   </a>
-
+                  <a mat-flat-button color="primary" class="w-50" (click)="onUpdateBook(bookDetails.selectedOptions.selected[0].value)">
+                    Update Book
+                  </a>
                 </div>
-                
-
               </div>
             </mat-card-content>
           </mat-card>

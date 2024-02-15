@@ -1,0 +1,38 @@
+<mat-card class="cardWithShadow theme-card">
+    <div class="row">  
+      <div class="col-lg-6">
+        <!-- --------------------------------------------------- -->
+        <!-- List with single Selection -->
+        <!-- --------------------------------------------------- -->
+        <mat-card class="b-1 shadow-none">
+          <mat-card-header>
+            <mat-card-title>Reading Log</mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="b-t-1">
+            <mat-selection-list #bookDetails [multiple]="false">
+              <mat-list-option *ngFor="let log of readingLogList" [value]="log">
+                  {{log.book.title}}<br>
+                  {{log.reader.fullName}}<br>
+                  {{log.reading_start}}
+              </mat-list-option>
+            </mat-selection-list>
+
+            <div *ngIf="bookDetails.selectedOptions.hasValue()">
+              <p class="mat-subtitle-2 f-w-600 p-16 bg-light-primary rounded">
+                Title: {{bookDetails.selectedOptions.selected[0].value.dateStart}}<br>
+                Author: {{bookDetails.selectedOptions.selected[0].value.author}}<br>
+                Description:<br>
+                {{bookDetails.selectedOptions.selected[0].value.description}}<br>
+              </p>
+              <div>
+                <a mat-flat-button color="primary" class="w-50" (click)="OnDeleteSelected(bookDetails.selectedOptions.selected[0].value.id)">
+                  Delete Book
+                </a>
+                <a mat-flat-button color="primary" class="w-50" (click)="onUpdateBook(bookDetails.selectedOptions.selected[0].value)">
+                  Update Book
+                </a>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>

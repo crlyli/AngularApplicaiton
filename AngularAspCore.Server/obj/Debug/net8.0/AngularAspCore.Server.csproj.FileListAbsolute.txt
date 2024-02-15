@@ -94,3 +94,4 @@ C:\Users\crystal lyliston\src\AngularApplicaiton\AngularAspCore.Server\bin\Debug
 C:\Users\crystal lyliston\src\AngularApplicaiton\AngularAspCore.Server\bin\Debug\net8.0\System.Security.Permissions.dll
 C:\Users\crystal lyliston\src\AngularApplicaiton\AngularAspCore.Server\bin\Debug\net8.0\AngularAspCore.Database.dll
 C:\Users\crystal lyliston\src\AngularApplicaiton\AngularAspCore.Server\bin\Debug\net8.0\AngularAspCore.Database.pdb
+C:\Users\crystal lyliston\src\AngularApplicaiton\AngularAspCore.Server\bin\Debug\net8.0\AngularAspCore.Server.staticwebassets.runtime.json

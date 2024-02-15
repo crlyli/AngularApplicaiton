@@ -18,22 +18,6 @@
                         <mat-form-field appearance="outline" class="w-100" color="primary">
                             <input matInput name="description" [(ngModel)]="model.description"/>
                         </mat-form-field>
-                        <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Rating:</mat-label>
-                        <mat-form-field appearance="outline" class="w-100" color="primary">
-                            <input type="number"  step=0.1  matInput name="rating" [(ngModel)]="model.rate"/>
-                        </mat-form-field>
-                        <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Started Reading:</mat-label>
-                        <mat-form-field appearance="outline" class="w-100" color="primary">
-                            <input matInput [matDatepicker]="startpicker" name="startdate" [(ngModel)]="model.dateStart">
-                            <mat-datepicker-toggle matIconSuffix [for]="startpicker"></mat-datepicker-toggle>
-                            <mat-datepicker #startpicker></mat-datepicker>
-                        </mat-form-field>
-                        <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Ended Reading:</mat-label>
-                        <mat-form-field appearance="outline" class="w-100" color="primary">
-                            <input matInput [matDatepicker]="picker" name="enddate" [(ngModel)]="model.dateFinish">
-                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                        </mat-form-field>
                         <a mat-flat-button color="primary" class="w-100" (click)="onFormSubmit()">
                             Create Book
                         </a>

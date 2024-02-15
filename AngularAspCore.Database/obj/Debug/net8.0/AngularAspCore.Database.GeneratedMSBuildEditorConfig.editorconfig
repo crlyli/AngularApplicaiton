@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = AngularAspCore.Database
-build_property.ProjectDir = C:\Users\crystal lyliston\src\AngularApplicaiton\AngularAspCore.Database\
+build_property.ProjectDir = c:\Users\crystal lyliston\src\AngularApplicaiton\AngularAspCore.Database\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

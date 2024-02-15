@@ -6,8 +6,11 @@ import { AppChipsComponent } from './chips/chips.component';
 import { AppListsComponent } from './lists/lists.component';
 import { AppMenuComponent } from './menu/menu.component';
 import { AppTooltipsComponent } from './tooltips/tooltips.component';
-import { AppAddBookComponent } from '../authentication/app-add-book/app-add-book.component';
+import { AppAddBookComponent } from './app-add-book/app-add-book.component';
 import { AppBookListComponent } from 'src/app/pages/ui-components/app-book-list/book-list.component';
+import { AppUpdateBookComponent } from './app-update-book/app-update-book.component';
+import { AppAddReadingLogComponent } from './app-add-reading-log/app-add-reading-log.component';
+import { AppReadingLogListComponent } from './app-reading-log-list/app-reading-log-list.component';
 
 export const UiComponentsRoutes: Routes = [
   {
@@ -38,8 +41,24 @@ export const UiComponentsRoutes: Routes = [
         component: AppAddBookComponent,
       },
       {
-        path: 'log',
+        path: 'addreadinglog',
+        component: AppAddReadingLogComponent,
+      },
+      {
+        path: 'updatebook',
+        component: AppUpdateBookComponent
+      },
+      {
+        path: 'booklist',
         component: AppBookListComponent,
+      },
+      {
+        path: 'addlog',
+        component: AppAddReadingLogComponent,
+      },
+      {
+        path: 'readinglog',
+        component: AppReadingLogListComponent,
       },
     ],
   },

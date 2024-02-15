@@ -1,70 +1,105 @@
 ﻿
+using AngularAspCore.Database;
 using AngularAspCore.Database.Data.Models;
-using AngularAspCore.Database.Data.Models.Dto;
-using AngularAspCore.Database.Repositories.DbContextData;
-using AngularAspCore.Database.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AngularAspCore.Server.Controllers
 {
+    /// <summary>
+    /// Books Controller
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class BooksController : Controller
     {
+        private readonly IRepositoryWraper _repo;
 
-        private readonly IBookRepository _bookRepository;
-        public BooksController(IBookRepository bookRepository)
+        /// <summary>
+        /// Books Controller Constructor
+        /// </summary>
+        /// <param name="repo"></param>
+        public BooksController(IRepositoryWraper repo)
         {
-            _bookRepository = bookRepository;
+            _repo = repo;
         }
 
+        /// <summary>
+        /// Add Book
+        /// </summary>
+        /// <param name="modeldata">Model data of book to add from api</param>
         [HttpPost]
-        public async Task<IActionResult> AddBookAsync([FromBody] BookDto modeldata)
+        public async Task<IActionResult> AddBookAsync([FromBody] BookDataModel modeldata)
         {
-            //Map dto to Domain Model
-            if (modeldata is null)
+            try
             {
-                //_logger.LogError("Owner object sent from client is null.");
-                return BadRequest("Owner object is null");
+                if (modeldata is null)
+                    return BadRequest("Owner object is null");
+                else
+                    _repo.BookRepository.Add(modeldata);
+                    await _repo.SaveAsync();
+
             }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    ex.Message);
+            }           
 
-            await _bookRepository.CreateAsync(modeldata);
-
-
-            return Ok(modeldata);
+            return Ok();
         }
 
+        /// <summary>
+        /// Get Books
+        /// </summary>
+        /// <returns>List of books</returns>
         [HttpGet]
-        public async Task<IActionResult> GetBooksAsync()
+        public IEnumerable<BookDataModel> GetBooksAsync()
         {
-            var allBooks = await _bookRepository.GetBooks();
-            return Ok(allBooks);
+            return _repo.BookRepository.GetAll();
         }
-        [HttpDelete("{id:int}")]
+
+        /// <summary>
+        /// Delete Book by id
+        /// </summary>
+        /// <param name="id">Book id pk</param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBookAsync(int id)
         {
             try
             {
-                var book = await _bookRepository.DeleteBook(id);
+                _repo.BookRepository.DeleteById(id);
+                await _repo.SaveAsync();
 
-                return book == false ? NotFound($"Book with Id = {id} not found") : Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    ex.Message + "Error deleting data");
+            }
+            return Ok();
+        }
+
+        /// <summary>
+        /// Update book -- TODO
+        /// </summary>
+        /// <param name="modeldata"></param>
+        /// <returns></returns>
+        [HttpPatch]
+        [Route("{id:int}")]
+        public async Task<IActionResult> UpdateBook([FromBody] BookDataModel modeldata)
+        {
+            try
+            {
+                _repo.BookRepository.Update(modeldata);
+
             }
             catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     "Error deleting data");
             }
-        }
-
-        [HttpPatch]
-        [Route("{id:int}")]
-        public async Task<IActionResult> GetBookByIdAsync(int fId, [FromBody] BookDto modeldata)
-        {
-            var allBooks = await _bookRepository.UpdateBookById(fId, modeldata);
-            if (allBooks == null)
-                return BadRequest();
-
-            return Ok(allBooks);
+           return Ok();
         }
     }
 }

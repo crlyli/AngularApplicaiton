@@ -29,18 +29,9 @@ namespace AngularAspCore.Database.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime?>("DateFinish")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("DateStart")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<double>("Rate")
-                        .HasColumnType("double");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -49,6 +40,67 @@ namespace AngularAspCore.Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BookData");
+                });
+
+            modelBuilder.Entity("AngularAspCore.Database.Data.Models.ReaderDataModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reader");
+                });
+
+            modelBuilder.Entity("AngularAspCore.Database.Data.Models.ReadingLogDataModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReaderId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ReadingEnded")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("ReadingStarted")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("ReaderId");
+
+                    b.ToTable("ReadingLog");
+                });
+
+            modelBuilder.Entity("AngularAspCore.Database.Data.Models.ReadingLogDataModel", b =>
+                {
+                    b.HasOne("AngularAspCore.Database.Data.Models.BookDataModel", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AngularAspCore.Database.Data.Models.ReaderDataModel", "Reader")
+                        .WithMany()
+                        .HasForeignKey("ReaderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("Reader");
                 });
 #pragma warning restore 612, 618
         }

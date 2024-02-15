@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment.development';
 @Injectable({
   providedIn: 'root'
 })
-export class PostService {
+export class BookService {
 
   constructor(private http: HttpClient) { 
   }
@@ -15,6 +15,9 @@ export class PostService {
   apiBaseUrl = environment.apiBaseUrl;
   bookdata = []
   getBooks(): Observable<BookDataModel[]> {
+    return this.http.get<any[]>(`${this.apiBaseUrl}/Books`)
+  };
+  getBookById(id:string): Observable<BookDataModel[]> {
     return this.http.get<any[]>(`${this.apiBaseUrl}/Books`)
   };
 

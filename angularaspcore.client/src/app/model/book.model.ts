@@ -3,7 +3,4 @@ export interface BookDataModel {
     title:string;
     description :string;
     author: string;
-    rate: number
-    dateStart: string;
-    dateFinish : string;
 }

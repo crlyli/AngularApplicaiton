@@ -1,0 +1,104 @@
+﻿
+using AngularAspCore.Database;
+using AngularAspCore.Database.Data.Models;
+using Microsoft.AspNetCore.Mvc;
+
+namespace AngularAspCore.Server.Controllers
+{
+    /// <summary>
+    /// Reader Controller
+    /// </summary>
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ReaderController : Controller
+    {
+        private readonly IRepositoryWraper _repo;
+        
+        /// <summary>
+        /// Reader Controller Constructor
+        /// </summary>
+        public ReaderController(IRepositoryWraper repo)
+        {
+            _repo = repo;
+        }
+
+        /// <summary>
+        /// Add Reader
+        /// </summary>
+        /// <param name="modeldata">Reader model data to add</param>
+        [HttpPost]
+        public async Task<IActionResult> AddReaderAsync([FromBody] ReaderDataModel modeldata)
+        {
+            try
+            {
+                if (modeldata is null)
+                    return BadRequest("Owner object is null");
+                else
+                    _repo.ReaderRepository.Add(modeldata);
+                await _repo.SaveAsync();
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    ex.Message);
+            }
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Get Readers
+        /// </summary>
+        /// <returns>List of all readers</returns>
+        [HttpGet]
+        public IEnumerable<ReaderDataModel> GetReadersAsync()
+        {
+            return _repo.ReaderRepository.GetAll();
+        }
+
+        /// <summary>
+        /// Delete reader by id
+        /// </summary>
+        /// <param name="id">Reader id pk</param>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteReaderAsync(int id)
+        {
+            try
+            {
+                _repo.ReaderRepository.DeleteById(id);
+                await _repo.SaveAsync();
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    ex.Message + "Error deleting data");
+            }
+            return Ok();
+        }
+
+        /// <summary>
+        /// Update Reader TODO
+        /// </summary>
+        /// <param name="modeldata"></param>
+        /// <returns></returns>
+        [HttpPatch]
+        [Route("{id:int}")]
+        public async Task<IActionResult> UpdateBook([FromBody] ReaderDataModel modeldata)
+        {
+            try
+            {
+                _repo.ReaderRepository.Update(modeldata);
+
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error deleting data");
+            }
+            return Ok();
+        }
+    }
+}
+

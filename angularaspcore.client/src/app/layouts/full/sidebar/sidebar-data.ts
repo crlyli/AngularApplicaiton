@@ -33,9 +33,24 @@ export const navItems: NavItem[] = [
     route: '/ui-components/lists',
   },
   {
+    displayName: 'Book List',
+    iconName: 'list',
+    route: '/ui-components/booklist',
+  },
+  {
     displayName: 'Reading Log',
     iconName: 'list',
-    route: '/ui-components/log',
+    route: '/ui-components/readinglog',
+  },
+  {
+    displayName: 'Add Reading Log',
+    iconName: 'plus',
+    route: '/ui-components/addlog',
+  },
+  {
+    displayName: 'Update Book',
+    iconName: 'list',
+    route: '/ui-components/updatebook',
   },
   // {
   //   displayName: 'Menu',

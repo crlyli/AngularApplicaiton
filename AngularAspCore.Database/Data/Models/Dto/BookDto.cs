@@ -1,23 +1,24 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace AngularAspCore.Database.Data.Models.Dto
+﻿namespace AngularAspCore.Database.Data.Models.Dto
 {
+    /// <summary>
+    /// Book Data Transfer Object
+    /// Used to translate between front end and database models
+    /// </summary>
     public class BookDto
     {
-        public int Id { get; set; }
-
-        [Required(ErrorMessage = "Book title is required")]
+        /// <summary>
+        /// Boo Title
+        /// </summary>
         public string Title { get; set; }
+
+        /// <summary>
+        /// Book Description 
+        /// </summary>
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "Author is required")]
+        /// <summary>
+        /// Book Author
+        /// </summary>
         public string Author { get; set; }
-
-        [Required(ErrorMessage = "Rating is required")]
-        public double Rate { get; set; }
-
-        [Required(ErrorMessage = "Start date is required")]
-        public string? DateStart { get; set; }
-        public string? DateFinish { get; set; }
     }
 }
