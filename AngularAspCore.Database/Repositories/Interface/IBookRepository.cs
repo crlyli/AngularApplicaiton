@@ -13,6 +13,6 @@ namespace AngularAspCore.Database.Repositories.Interface
         /// Delete Book by Id
         /// </summary>
         /// <param name="id">Book Id pk</param>
-        void DeleteById(int id);
+        Task DeleteById(int id);
     }
 }

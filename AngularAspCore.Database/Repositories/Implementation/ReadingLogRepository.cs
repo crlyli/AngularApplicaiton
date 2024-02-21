@@ -22,11 +22,14 @@ namespace AngularAspCore.Database.Repositories.Implementation
         }
 
         ///<inheritdoc/> 
-        public void DeleteById(int id)
+        public async Task DeleteById(int id)
         {
-            var fBook = _mDbContext.ReadingLog.Where(book => book.Id == id).FirstOrDefault();
-            _mDbContext.Remove(fBook);
-            _mDbContext.SaveChangesAsync();
+            var fReadingLog = _mDbContext.Reader.Where(log => log.Id == id).FirstOrDefault();
+            if (fReadingLog is not null)
+            {
+                _mDbContext.Remove(fReadingLog);
+                await _mDbContext.SaveChangesAsync();
+            }
         }
 
         ///<inheritdoc/>

@@ -32,20 +32,13 @@ namespace AngularAspCore.Server.Controllers
         {
             try
             {
-                if (modeldata is null)
-                    return BadRequest("Owner object is null");
-                else
-                    _repo.BookRepository.Add(modeldata);
-                    await _repo.SaveAsync();
-
+                await _repo.BookRepository.Add(modeldata);
+                return Ok("Book added sucessfully");
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    ex.Message);
-            }           
-
-            return Ok();
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         /// <summary>
@@ -53,9 +46,18 @@ namespace AngularAspCore.Server.Controllers
         /// </summary>
         /// <returns>List of books</returns>
         [HttpGet]
-        public IEnumerable<BookDataModel> GetBooksAsync()
+        public IActionResult GetBooksAsync()
         {
-            return _repo.BookRepository.GetAll();
+            try
+            {
+                var books = _repo.BookRepository.GetAll();
+                return Ok(books);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    ex.Message);
+            }
         }
 
         /// <summary>
@@ -68,8 +70,7 @@ namespace AngularAspCore.Server.Controllers
         {
             try
             {
-                _repo.BookRepository.DeleteById(id);
-                await _repo.SaveAsync();
+                await _repo.BookRepository.DeleteById(id);
 
             }
             catch (Exception ex)
@@ -91,13 +92,13 @@ namespace AngularAspCore.Server.Controllers
         {
             try
             {
-                _repo.BookRepository.Update(modeldata);
+                await _repo.BookRepository.Update(modeldata);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error deleting data");
+                    ex.Message);
             }
            return Ok();
         }

@@ -35,9 +35,7 @@ namespace AngularAspCore.Server.Controllers
                 if (modeldata is null)
                     return BadRequest("Owner object is null");
                 else
-                    _repo.ReadingLogRepository.Add(model);
-                await _repo.SaveAsync();
-
+                    await _repo.ReadingLogRepository.Add(model);
             }
             catch (Exception ex)
             {
@@ -64,9 +62,7 @@ namespace AngularAspCore.Server.Controllers
         {
             try
             {
-                _repo.ReadingLogRepository.DeleteById(id);
-                await _repo.SaveAsync();
-
+                await _repo.ReadingLogRepository.DeleteById(id);
             }
             catch (Exception ex)
             {
@@ -87,9 +83,7 @@ namespace AngularAspCore.Server.Controllers
         {
             try
             {
-                _repo.ReadingLogRepository.Update(modeldata);
-                await _repo.SaveAsync();
-
+                await _repo.ReadingLogRepository.Update(modeldata);    
             }
             catch (Exception)
             {

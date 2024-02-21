@@ -1,5 +1,5 @@
 <mat-card class="cardWithShadow theme-card">
-    <div class="row">  
+    <div class="row">
       <div class="col-lg-6">
         <!-- --------------------------------------------------- -->
         <!-- List with single Selection -->
@@ -19,10 +19,10 @@
 
             <div *ngIf="bookDetails.selectedOptions.hasValue()">
               <p class="mat-subtitle-2 f-w-600 p-16 bg-light-primary rounded">
-                Title: {{bookDetails.selectedOptions.selected[0].value.dateStart}}<br>
-                Author: {{bookDetails.selectedOptions.selected[0].value.author}}<br>
+                Title: {{bookDetails.selectedOptions.selected[0].value.book.title}}<br>
+                Author: {{bookDetails.selectedOptions.selected[0].value.reader.fullName}}<br>
                 Description:<br>
-                {{bookDetails.selectedOptions.selected[0].value.description}}<br>
+                {{bookDetails.selectedOptions.selected[0].value.book.description}}<br>
               </p>
               <div>
                 <a mat-flat-button color="primary" class="w-50" (click)="OnDeleteSelected(bookDetails.selectedOptions.selected[0].value.id)">

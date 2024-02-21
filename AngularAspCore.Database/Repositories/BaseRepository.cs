@@ -6,41 +6,37 @@ namespace AngularAspCore.Database.Repositories
     ///<inheritdoc cref="IBaseRepository{T}"/> 
     public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        protected ApplicationDbContext RepositoryContent { get; set; }
+        protected ApplicationDbContext _dbContext { get; set; }
         protected BaseRepository(ApplicationDbContext repositoryContent)
         {
-            RepositoryContent = repositoryContent;
+            _dbContext = repositoryContent;
         }
 
         ///<inheritdoc cref="IBaseRepository{T}"/> 
         public IEnumerable<T> GetAll()
         {
-            return RepositoryContent.Set<T>().AsEnumerable();
+            return _dbContext.Set<T>().AsEnumerable();
         }
 
         ///<inheritdoc cref="IBaseRepository{T}"/> 
-        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression)
+        public async Task Add(T entity)
         {
-            return RepositoryContent.Set<T>()
-                .Where(expression).AsNoTracking();
+            await _dbContext.Set<T>().AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
         ///<inheritdoc cref="IBaseRepository{T}"/> 
-        public void Add(T entity)
+        public async Task Update(T entity)
         {
-            RepositoryContent.Set<T>().Add(entity);
+            _dbContext.Set<T>().Update(entity);
+            await _dbContext.SaveChangesAsync();
         }
 
         ///<inheritdoc cref="IBaseRepository{T}"/> 
-        public void Update(T entity)
+        public async Task Delete(T entity)
         {
-            RepositoryContent.Set<T>().Update(entity);
-        }
-
-        ///<inheritdoc cref="IBaseRepository{T}"/> 
-        public void Delete(T entity)
-        {
-            RepositoryContent.Set<T>().Remove(entity);
+            _dbContext.Set<T>().Remove(entity);
+            await _dbContext.SaveChangesAsync();
         }
     }
 

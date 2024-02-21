@@ -28,11 +28,6 @@ export const navItems: NavItem[] = [
     route: '/ui-components/addbook',
   },
   {
-    displayName: 'Lists',
-    iconName: 'list',
-    route: '/ui-components/lists',
-  },
-  {
     displayName: 'Book List',
     iconName: 'list',
     route: '/ui-components/booklist',

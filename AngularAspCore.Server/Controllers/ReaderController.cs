@@ -32,18 +32,15 @@ namespace AngularAspCore.Server.Controllers
             try
             {
                 if (modeldata is null)
-                    return BadRequest("Owner object is null");
+                    return BadRequest("Reader object is null");
                 else
-                    _repo.ReaderRepository.Add(modeldata);
-                await _repo.SaveAsync();
-
+                    await _repo.ReaderRepository.Add(modeldata);
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     ex.Message);
             }
-
             return Ok();
         }
 
@@ -52,9 +49,18 @@ namespace AngularAspCore.Server.Controllers
         /// </summary>
         /// <returns>List of all readers</returns>
         [HttpGet]
-        public IEnumerable<ReaderDataModel> GetReadersAsync()
+        public IActionResult GetReadersAsync()
         {
-            return _repo.ReaderRepository.GetAll();
+            try
+            {
+                var readers = _repo.BookRepository.GetAll();
+                return Ok(readers);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    ex.Message);
+            }
         }
 
         /// <summary>
@@ -66,9 +72,7 @@ namespace AngularAspCore.Server.Controllers
         {
             try
             {
-                _repo.ReaderRepository.DeleteById(id);
-                await _repo.SaveAsync();
-
+                await _repo.ReaderRepository.DeleteById(id);
             }
             catch (Exception ex)
             {
@@ -89,13 +93,13 @@ namespace AngularAspCore.Server.Controllers
         {
             try
             {
-                _repo.ReaderRepository.Update(modeldata);
+                await _repo.ReaderRepository.Update(modeldata);
 
             }
             catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error deleting data");
+                    "Error updating data");
             }
             return Ok();
         }

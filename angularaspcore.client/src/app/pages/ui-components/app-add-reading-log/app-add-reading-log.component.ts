@@ -23,9 +23,9 @@ export class AppAddReadingLogComponent implements OnInit{
   dateStart = new Date();
   dateEnd = null;
   dast:string | null;
-  
+
   constructor(private readingLogService: ReadingLogService, private readerService: ReaderService, private bookService: BookService){
-    
+
   }
   ngOnInit(): void {
     this.bookModel = {
@@ -51,7 +51,7 @@ export class AppAddReadingLogComponent implements OnInit{
   }
   private addReadingLogSubscription : Subscription;
   onFormSubmit()
-  { 
+  {
     this.dast = new DatePipe('en').transform(this.dateStart, 'yyyy/MM/dd');
     this.readingLogModel.reading_start = this.dast?.toString() != null ? this.dast?.toString() : new Date().toString();
 
@@ -72,7 +72,7 @@ export class AppAddReadingLogComponent implements OnInit{
       {
         this.readingLogModel = response;
       }
-    );  
+    );
   };
   getReaderList(){
     this.addReadingLogSubscription = this.readerService.getReaders().subscribe(response =>
@@ -81,14 +81,14 @@ export class AppAddReadingLogComponent implements OnInit{
       })
   };
   getBookList(){
-    this.addReadingLogSubscription = this.bookService.getBooks().subscribe(response => 
+    this.addReadingLogSubscription = this.bookService.getBooks().subscribe(response =>
       {
         this.bookList = response;
       })
   };
   fetchSelectedDate()
   {
-    
+
   }
   ngOnDestroy(): void {
     this.addReadingLogSubscription?.unsubscribe();

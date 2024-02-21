@@ -23,11 +23,14 @@ namespace AngularAspCore.Database.Repositories.Implementation
         }
 
         ///<inheritdoc cref="IBookRepository"/>
-        public void DeleteById(int id)
+        public async Task DeleteById(int id)
         {
             var fBook = _mDbContext.BookData.Where(book => book.Id == id).FirstOrDefault();
-            _mDbContext.Remove(fBook);
-            _mDbContext.SaveChangesAsync();
+            if (fBook is not null)
+            {
+                _mDbContext.Remove(fBook);
+                await _mDbContext.SaveChangesAsync();
+            }
         }
     }
 }

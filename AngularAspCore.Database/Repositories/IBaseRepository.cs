@@ -20,28 +20,21 @@ namespace AngularAspCore.Database.Repositories
         IEnumerable<T> GetAll();
 
         /// <summary>
-        /// Find by Condidtion
-        /// </summary>
-        /// <param name="expression">Expression to use</param>
-        /// <returns>Need to look at</returns>
-        IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression);
-
-        /// <summary>
         /// Add To Entity
         /// </summary>
         /// <param name="entity">Entity to use</param>
-        void Add(T entity);
+        Task Add(T entity);
 
         /// <summary>
         /// Update Entity
         /// </summary>
         /// <param name="entity">Entity to update</param>
-        void Update(T entity);
+        Task Update(T entity);
 
         /// <summary>
         /// Delete Entity
         /// </summary>
         /// <param name="entity">Entity to delete</param>
-        void Delete(T entity);
+        Task Delete(T entity);
     }
 }
