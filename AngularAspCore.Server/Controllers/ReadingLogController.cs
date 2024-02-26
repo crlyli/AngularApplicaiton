@@ -29,21 +29,26 @@ namespace AngularAspCore.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> AddReadingLogAsync([FromBody] ReadingLogDto modeldata)
         {
+            int? logId = null;
             try
-            {
-                var model = DataConverters.ConvertToReadingLogDataModel(modeldata);
-                if (modeldata is null)
-                    return BadRequest("Owner object is null");
-                else
-                    await _repo.ReadingLogRepository.Add(model);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    ex.Message);
-            }
+                {
+                
+                    if (modeldata is null)
+                        return BadRequest("Reading Log object is null");
+                    else
+                    {
+                        var model = DataConverters.ConvertToReadingLogDataModel(modeldata);
+                        logId = await _repo.ReadingLogRepository.Add(model);
+                    }
+                        
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError,
+                        ex.Message);
+                }
+                return CreatedAtAction(nameof(GetReadingLog), new { id = logId }, modeldata);
 
-            return Ok();
         }
 
         /// <summary>
@@ -51,7 +56,46 @@ namespace AngularAspCore.Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<ReadingLogDataModel> GetReadingLogAsync() => _repo.ReadingLogRepository.GetAllData();
+        public IActionResult GetReadingLogAsync()
+        {
+            try
+            {
+                var books = _repo.ReadingLogRepository.GetAllData();
+                return Ok(books);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    ex.Message);
+            }
+        }
+        //=> _repo.ReadingLogRepository.GetAllData();
+
+        /// <summary>
+        /// Get Reading log by id
+        /// </summary>
+        /// <param name="id">Unique reading log id</param>
+        /// <returns>Reading log or bad result</returns>
+        [HttpGet("{id:int}")]
+        public ActionResult GetReadingLog(int id)
+        {
+            try
+            {
+                var result = _repo.ReaderRepository.GetById(id);
+
+                if (result is null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
+            }
+        }
 
         /// <summary>
         /// Delete reading log with id pk

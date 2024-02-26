@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AngularAspCore.Database.Repositories
+﻿namespace AngularAspCore.Database.Repositories
 {
     /// <summary>
     /// Base Repository
@@ -36,5 +29,18 @@ namespace AngularAspCore.Database.Repositories
         /// </summary>
         /// <param name="entity">Entity to delete</param>
         Task Delete(T entity);
+
+        /// <summary>
+        /// Get Entity by Id
+        /// </summary>
+        /// <param name="id">Unique ID </param>
+        /// <returns>Entity with id</returns>
+        T GetById(int id);
+
+        /// <summary>
+        /// Deleted by id
+        /// </summary>
+        /// <param name="id">unique id number</param>
+        Task<T> DeleteById(int id);
     }
 }

@@ -41,7 +41,7 @@ namespace AngularAspCore.Server.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     ex.Message);
             }
-            return Ok();
+            return CreatedAtAction(nameof(GetReader), new { id = modeldata.Id }, modeldata);
         }
 
         /// <summary>
@@ -53,13 +53,39 @@ namespace AngularAspCore.Server.Controllers
         {
             try
             {
-                var readers = _repo.BookRepository.GetAll();
+                var readers = _repo.ReaderRepository.GetAll();
                 return Ok(readers);
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Get Reader by Id
+        /// </summary>
+        /// <param name="id">Unique id</param>
+        /// <returns>Reader with id or bad result</returns>
+        [HttpGet("{id:int}")]
+        public ActionResult GetReader(int id)
+        {
+            try
+            {
+                var result = _repo.ReaderRepository.GetById(id);
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
             }
         }
 
@@ -89,7 +115,7 @@ namespace AngularAspCore.Server.Controllers
         /// <returns></returns>
         [HttpPatch]
         [Route("{id:int}")]
-        public async Task<IActionResult> UpdateBook([FromBody] ReaderDataModel modeldata)
+        public async Task<IActionResult> UpdateReaderAsync([FromBody] ReaderDataModel modeldata)
         {
             try
             {

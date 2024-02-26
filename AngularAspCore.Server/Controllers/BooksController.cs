@@ -32,13 +32,17 @@ namespace AngularAspCore.Server.Controllers
         {
             try
             {
-                await _repo.BookRepository.Add(modeldata);
-                return Ok("Book added sucessfully");
+                if (modeldata is null)
+                    return BadRequest("Book object is null");
+                else
+                    await _repo.BookRepository.Add(modeldata);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Internal server error");
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    ex.Message);
             }
+            return CreatedAtAction(nameof(GetBook), new { id = modeldata.Id }, modeldata);
         }
 
         /// <summary>
@@ -60,6 +64,31 @@ namespace AngularAspCore.Server.Controllers
             }
         }
 
+        /// <summary>
+        /// Get Book By unique id
+        /// </summary>
+        /// <param name="id">Unique book id</param>
+        /// <returns>Book or bad results</returns>
+        [HttpGet("{id:int}")]
+        public ActionResult GetBook(int id)
+        {
+            try
+            {
+                var result = _repo.BookRepository.GetById(id);
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
+            }
+        }
         /// <summary>
         /// Delete Book by id
         /// </summary>

@@ -9,10 +9,5 @@ namespace AngularAspCore.Database.Repositories.Interface
     /// </summary>
     public interface IBookRepository : IBaseRepository<BookDataModel>
     {
-        /// <summary>
-        /// Delete Book by Id
-        /// </summary>
-        /// <param name="id">Book Id pk</param>
-        Task DeleteById(int id);
     }
 }

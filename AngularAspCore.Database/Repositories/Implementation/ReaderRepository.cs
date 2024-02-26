@@ -25,15 +25,15 @@ namespace AngularAspCore.Database.Repositories.Implementation
             _mDbContext = dbContext;
         }
 
-        ///<inheritdoc cref="IReaderRepository"/>
-        public async Task DeleteById(int id)
-        {
-            var fReader = _mDbContext.Reader.Where(reader => reader.Id == id).FirstOrDefault();
-            if (fReader is not null)
-            {
-                _mDbContext.Remove(fReader);
-                await _mDbContext.SaveChangesAsync();
-            }
-        }
+        /////<inheritdoc cref="IReaderRepository"/>
+        //public async Task DeleteById(int id)
+        //{
+        //    var fReader = _mDbContext.Reader.Where(reader => reader.Id == id).FirstOrDefault();
+        //    if (fReader is not null)
+        //    {
+        //        _mDbContext.Remove(fReader);
+        //        await _mDbContext.SaveChangesAsync();
+        //    }
+        //}
     }
 }

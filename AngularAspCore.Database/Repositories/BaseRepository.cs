@@ -1,5 +1,7 @@
-﻿using AngularAspCore.Database.Repositories.DbContextData;
+﻿using AngularAspCore.Database.Data.Models;
+using AngularAspCore.Database.Repositories.DbContextData;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Update;
 using System.Linq.Expressions;
 namespace AngularAspCore.Database.Repositories
 {
@@ -37,6 +39,21 @@ namespace AngularAspCore.Database.Repositories
         {
             _dbContext.Set<T>().Remove(entity);
             await _dbContext.SaveChangesAsync();
+        }
+        public async Task<T> DeleteById(int id)
+        {
+            var fResults = _dbContext.Set<T>().Find(id);
+            if (fResults is not null)
+            {
+                _dbContext.Remove(fResults);
+                await _dbContext.SaveChangesAsync();
+                
+            }
+            return fResults;
+        }
+        public T GetById(int id)
+        {
+            return _dbContext.Set<T>().Find(id);
         }
     }
 
