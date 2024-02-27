@@ -7,5 +7,5 @@ export interface ReadingLogDataModel{
     book:BookDataModel;
     reader: ReaderDataModel;
     reading_start: string;
-    reading_end: string | null;
+    reading_end: string | undefined;
 }

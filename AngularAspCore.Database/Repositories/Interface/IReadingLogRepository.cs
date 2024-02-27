@@ -13,6 +13,6 @@ namespace AngularAspCore.Database.Repositories.Interface
         /// <returns>Returns reading log data</returns>
         IEnumerable<ReadingLogDataModel> GetAllData();
 
-        Task<int> Add(ReadingLogDataModel readinglog);
+        Task<ReadingLogDataModel> Add(ReadingLogDataModel readinglog);
     }
 }

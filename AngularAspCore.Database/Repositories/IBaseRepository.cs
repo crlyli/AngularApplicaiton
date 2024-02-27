@@ -16,7 +16,7 @@
         /// Add To Entity
         /// </summary>
         /// <param name="entity">Entity to use</param>
-        Task Add(T entity);
+        Task<T> Add(T entity);
 
         /// <summary>
         /// Update Entity

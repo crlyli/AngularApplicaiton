@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
-import { BookDataModel } from 'src/app/model/book.model';
 import { ReadingLogDataModel } from 'src/app/model/reading_log.model';
+import { ReadingLogDtoModel } from 'src/app/model/reading_log_dto.model';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment.development';
 })
 export class ReadingLogService {
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
   }
 
   apiBaseUrl = environment.apiBaseUrl;
@@ -22,10 +22,11 @@ export class ReadingLogService {
     return this.http.get<any[]>(`${this.apiBaseUrl}/ReadingLog`)
   };
 
-  addreadinglog(model: ReadingLogDataModel): Observable<void> {
+  addreadinglog(model: ReadingLogDtoModel): Observable<void> {
+    debugger;
   return this.http.post<void>(`${this.apiBaseUrl}/ReadingLog`, model)
   };
-  
+
   deletereadinglog(id:string): Observable<void> {
     return this.http.delete<void>(`${this.apiBaseUrl}/ReadingLog` + `/` + id)
     };

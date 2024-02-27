@@ -1,4 +1,5 @@
 using AngularAspCore.Database;
+using AngularAspCore.Database.Converters;
 using AngularAspCore.Database.Repositories.DbContextData;
 using AngularAspCore.Database.Repositories.Implementation;
 using AngularAspCore.Database.Repositories.Interface;
@@ -29,6 +30,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IDataConverters, DataConverters>();
 builder.Services.AddScoped<IRepositoryWraper, RepositoryWrapper>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IReaderRepository, ReaderRepository>();

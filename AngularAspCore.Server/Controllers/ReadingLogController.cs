@@ -1,10 +1,13 @@
 ﻿using AngularAspCore.Database;
+using AngularAspCore.Database.Converters;
 using AngularAspCore.Database.Data.Models;
 using AngularAspCore.Database.Data.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AngularAspCore.Server.Controllers
 {
+    
+
     /// <summary>
     /// Reading Log Controller
     /// </summary>
@@ -13,13 +16,15 @@ namespace AngularAspCore.Server.Controllers
     public class ReadingLogController : Controller
     {
         private readonly IRepositoryWraper _repo;
-        
+        private readonly IDataConverters mrDataConverters;
+
         /// <summary>
         /// Reading log controller constructor
         /// </summary>
-        public ReadingLogController(IRepositoryWraper repo)
+        public ReadingLogController(IRepositoryWraper repo, IDataConverters dataConverters)
         {
             _repo = repo;
+            mrDataConverters = dataConverters;
         }
 
         /// <summary>
@@ -29,7 +34,7 @@ namespace AngularAspCore.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> AddReadingLogAsync([FromBody] ReadingLogDto modeldata)
         {
-            int? logId = null;
+            ReadingLogDataModel? resultsModel = null;
             try
                 {
                 
@@ -37,8 +42,8 @@ namespace AngularAspCore.Server.Controllers
                         return BadRequest("Reading Log object is null");
                     else
                     {
-                        var model = DataConverters.ConvertToReadingLogDataModel(modeldata);
-                        logId = await _repo.ReadingLogRepository.Add(model);
+                        var model = mrDataConverters.ConvertToReadingLogDataModel(modeldata);
+                        resultsModel = await _repo.ReadingLogRepository.Add(model);
                     }
                         
                 }
@@ -47,7 +52,7 @@ namespace AngularAspCore.Server.Controllers
                     return StatusCode(StatusCodes.Status500InternalServerError,
                         ex.Message);
                 }
-                return CreatedAtAction(nameof(GetReadingLog), new { id = logId }, modeldata);
+                return CreatedAtAction(nameof(GetReadingLog), new { id = mrDataConverters.ReadingLogDataModel.Id }, mrDataConverters.ReadingLogDataModel);
 
         }
 

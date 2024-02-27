@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System.Net;
 
-
-
 namespace AngularAspCore.UnitTest.AngularAspCore.Server.Controllers.Tests
 {
     internal class ReaderControllerUnitTests
@@ -15,27 +13,30 @@ namespace AngularAspCore.UnitTest.AngularAspCore.Server.Controllers.Tests
         [TestFixture]
         public class UnitTest1
         {
-            private Mock<IRepositoryWraper> mockIWrapperRepository;
-            private ReaderController mockReaderController;
+            private Mock<IRepositoryWraper> 
+                _mockIWrapperRepository;
+
+            private ReaderController 
+                _mockReaderController;
 
             [SetUp]
             public void Setup()
             {
-                mockIWrapperRepository = MockIWrapperRepository.GetMock();
-                mockReaderController = new ReaderController(mockIWrapperRepository.Object);
+                _mockIWrapperRepository = MockIWrapperRepository.GetMock();
+                _mockReaderController = new ReaderController(_mockIWrapperRepository.Object);
             }
 
             [TearDown]
             public void Teardown()
             {
-                mockReaderController.Dispose();
+                _mockReaderController.Dispose();
             }
 
             [Test]
             public void ReaderController_GetAll_Ok()
             {
                 //Act
-                var results = mockReaderController.GetReadersAsync() as ObjectResult;
+                var results = _mockReaderController.GetReadersAsync() as ObjectResult;
 
                 //Assert
                 Assert.IsNotNull(results);
@@ -47,7 +48,7 @@ namespace AngularAspCore.UnitTest.AngularAspCore.Server.Controllers.Tests
             public void ReaderController_GetById_Ok()
             {
                 //Act
-                var results = mockReaderController.GetReader(1);
+                var results = _mockReaderController.GetReader(1);
                 var objectResults = results as ObjectResult;
 
                 //Assert
@@ -59,7 +60,7 @@ namespace AngularAspCore.UnitTest.AngularAspCore.Server.Controllers.Tests
             public void ReaderController_GetById_BadRequest_Id_unknown()
             {
                 //Act
-                var results = mockReaderController.GetReader(10) as StatusCodeResult;
+                var results = _mockReaderController.GetReader(10) as StatusCodeResult;
 
                 //Assert
                 Assert.IsNotNull(results);
@@ -77,7 +78,7 @@ namespace AngularAspCore.UnitTest.AngularAspCore.Server.Controllers.Tests
                 };
 
                 //Act
-                var results = mockReaderController.AddReaderAsync(reader);
+                var results = _mockReaderController.AddReaderAsync(reader);
                 var objectResults = results.Result as ObjectResult;
 
                 //Assert
@@ -91,7 +92,7 @@ namespace AngularAspCore.UnitTest.AngularAspCore.Server.Controllers.Tests
             public void ReaderController_DeletedUser_Ok()
             {
                 //Act
-                var results = mockReaderController.DeleteReaderAsync(1);
+                var results = _mockReaderController.DeleteReaderAsync(1);
                 var objectResults = results.Result as OkResult;
 
                 //Assert

@@ -5,6 +5,8 @@ using AngularAspCore.UnitTest.MockingSetups;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System.Net;
+using AngularAspCore.Database.Data.Models.Dto;
+using AngularAspCore.Database.Converters;
 
 namespace AngularAspCore.UnitTest.AngularAspCore.Server.Controllers.Tests
 {
@@ -13,27 +15,50 @@ namespace AngularAspCore.UnitTest.AngularAspCore.Server.Controllers.Tests
         [TestFixture]
         public class UnitTest1
         {
-            private Mock<IRepositoryWraper> mockIWrapperRepository;
-            private ReadingLogController mockReadingLogController;
+            private Mock<IRepositoryWraper> 
+                _mockIWrapperRepository;
+
+            private ReadingLogController 
+                _mockReadingLogController;
+
+            private Mock<IDataConverters> 
+                _mockConverters;
 
             [SetUp]
             public void Setup()
             {
-                mockIWrapperRepository = MockIWrapperRepository.GetMock();
-                mockReadingLogController = new ReadingLogController(mockIWrapperRepository.Object);
+                _mockIWrapperRepository = MockIWrapperRepository.GetMock();
+                _mockConverters = new Mock<IDataConverters>();
+                _mockConverters.Setup(aCon => aCon.ReadingLogDataModel).Returns(new ReadingLogDataModel()
+                {
+                    Id = 1,
+                    Reader = new ReaderDataModel()
+                    {
+                        FullName = "Test"
+                    },
+                    Book = new BookDataModel()
+                    {
+                        Title = "Test",
+                        Author = "Test",
+                        Description = "Test",
+                    },
+                    ReadingStarted = DateTime.Now
+                });
+                _mockReadingLogController = new ReadingLogController(_mockIWrapperRepository.Object, 
+                    _mockConverters.Object);
             }
 
             [TearDown]
             public void Teardown()
             {
-                mockReadingLogController.Dispose();
+                _mockReadingLogController.Dispose();
             }
 
             [Test]
             public void ReadingLogController_GetAll_Ok()
             {
                 //Act
-                var results = mockReadingLogController.GetReadingLogAsync() as ObjectResult;
+                var results = _mockReadingLogController.GetReadingLogAsync() as ObjectResult;
 
                 //Assert
                 Assert.IsNotNull(results);
@@ -45,7 +70,7 @@ namespace AngularAspCore.UnitTest.AngularAspCore.Server.Controllers.Tests
             public void ReadingLogController_GetById_Ok()
             {
                 //Act
-                var results = mockReadingLogController.GetReadingLog(1);
+                var results = _mockReadingLogController.GetReadingLog(1);
                 var objectResults = results as ObjectResult;
 
                 //Assert
@@ -57,7 +82,7 @@ namespace AngularAspCore.UnitTest.AngularAspCore.Server.Controllers.Tests
             public void ReadingLogController_GetById_BadRequest_Id_unknown()
             {
                 //Act
-                var results = mockReadingLogController.GetReadingLog(10) as StatusCodeResult;
+                var results = _mockReadingLogController.GetReadingLog(10) as StatusCodeResult;
 
                 //Assert
                 Assert.IsNotNull(results);
@@ -68,7 +93,7 @@ namespace AngularAspCore.UnitTest.AngularAspCore.Server.Controllers.Tests
             public void ReadingLogController_CreateUser_Ok()
             {
                 //Arrange
-                var fReadingLog = new Database.Data.Models.Dto.ReadingLogDto()
+                var fReadingLog = new ReadingLogDto()
                 {
                     ReaderId = new ReaderDataModel()
                     { 
@@ -84,7 +109,7 @@ namespace AngularAspCore.UnitTest.AngularAspCore.Server.Controllers.Tests
                 };
 
                 //Act
-                var results = mockReadingLogController.AddReadingLogAsync(fReadingLog);
+                var results = _mockReadingLogController.AddReadingLogAsync(fReadingLog);
                 var objectResults = results.Result as ObjectResult;
 
                 //Assert
@@ -98,7 +123,7 @@ namespace AngularAspCore.UnitTest.AngularAspCore.Server.Controllers.Tests
             public void ReadingLogController_DeletedUser_Ok()
             {
                 //Act
-                var results = mockReadingLogController.DeleteReadingLogAsync(1);
+                var results = _mockReadingLogController.DeleteReadingLogAsync(1);
                 var objectResults = results.Result as OkResult;
 
                 //Assert

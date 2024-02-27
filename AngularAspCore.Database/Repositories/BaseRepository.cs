@@ -21,10 +21,11 @@ namespace AngularAspCore.Database.Repositories
         }
 
         ///<inheritdoc cref="IBaseRepository{T}"/> 
-        public async Task Add(T entity)
+        public async Task<T> Add(T entity)
         {
             await _dbContext.Set<T>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();
+            return entity;
         }
 
         ///<inheritdoc cref="IBaseRepository{T}"/> 
@@ -40,6 +41,8 @@ namespace AngularAspCore.Database.Repositories
             _dbContext.Set<T>().Remove(entity);
             await _dbContext.SaveChangesAsync();
         }
+
+        ///<inheritdoc cref="IBaseRepository{T}"/> 
         public async Task<T> DeleteById(int id)
         {
             var fResults = _dbContext.Set<T>().Find(id);
@@ -51,6 +54,8 @@ namespace AngularAspCore.Database.Repositories
             }
             return fResults;
         }
+
+        ///<inheritdoc cref="IBaseRepository{T}"/> 
         public T GetById(int id)
         {
             return _dbContext.Set<T>().Find(id);

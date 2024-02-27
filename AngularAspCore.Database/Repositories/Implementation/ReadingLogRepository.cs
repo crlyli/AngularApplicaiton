@@ -21,17 +21,6 @@ namespace AngularAspCore.Database.Repositories.Implementation
             _mDbContext = repositoryContext;
         }
 
-        ///<inheritdoc/> 
-        //public async Task DeleteById(int id)
-        //{
-        //    var fReadingLog = _mDbContext.Reader.Where(log => log.Id == id).FirstOrDefault();
-        //    if (fReadingLog is not null)
-        //    {
-        //        _mDbContext.Remove(fReadingLog);
-        //        await _mDbContext.SaveChangesAsync();
-        //    }
-        //}
-
         ///<inheritdoc/>
         public IEnumerable<ReadingLogDataModel> GetAllData()
         {
@@ -39,12 +28,13 @@ namespace AngularAspCore.Database.Repositories.Implementation
                 .Include(s =>s.Book)
                 .AsEnumerable();
         }
+
         ///<inheritdoc cref="IBaseRepository{T}"/> 
-        public async Task<int> Add(ReadingLogDataModel readinglog)
+        public async Task<ReadingLogDataModel> Add(ReadingLogDataModel readinglog)
         {
             await _dbContext.ReadingLog.AddAsync(readinglog);
             await _dbContext.SaveChangesAsync();
-            return readinglog.Id;
+            return readinglog;
         }
     }
 }

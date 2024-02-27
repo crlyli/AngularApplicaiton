@@ -7,6 +7,7 @@ import { BookDataModel } from 'src/app/model/book.model';
 import { ReaderService } from 'src/app/services/api-service/reader.service';
 import { BookService } from 'src/app/services/api-service/book.service';
 import { DatePipe } from '@angular/common';
+import { ReadingLogDtoModel } from 'src/app/model/reading_log_dto.model';
 
 @Component({
   selector: 'app-app-add-reading-log',
@@ -16,13 +17,15 @@ import { DatePipe } from '@angular/common';
 })
 export class AppAddReadingLogComponent implements OnInit{
   readingLogModel: ReadingLogDataModel;
+  readingLogDto: ReadingLogDtoModel;
   readerModel: ReaderDataModel;
   bookModel: BookDataModel;
   bookList: BookDataModel[];
   readerList: ReaderDataModel[];
   dateStart = new Date();
-  dateEnd = null;
+  dateEnd = "";
   dast:string | null;
+  dastEnd:string | null;
 
   constructor(private readingLogService: ReadingLogService, private readerService: ReaderService, private bookService: BookService){
 
@@ -44,7 +47,7 @@ export class AppAddReadingLogComponent implements OnInit{
       reader_id: this.readerModel,
       book_id: this.bookModel,
       reading_start: this.dateStart.toString(),
-      reading_end: null
+      reading_end: ""
     }
     this.getReaderList();
     this.getBookList();
@@ -53,9 +56,18 @@ export class AppAddReadingLogComponent implements OnInit{
   onFormSubmit()
   {
     this.dast = new DatePipe('en').transform(this.dateStart, 'yyyy/MM/dd');
-    this.readingLogModel.reading_start = this.dast?.toString() != null ? this.dast?.toString() : new Date().toString();
+    this.dastEnd = new DatePipe('en').transform(this.dateEnd, 'yyyy/MM/dd');
 
-    this.addReadingLogSubscription = this.readingLogService.addreadinglog(this.readingLogModel)
+    this.readingLogModel.reading_start = this.dast?.toString() != null ? this.dast?.toString() : new Date().toString();
+    this.readingLogModel.reading_end = this.dastEnd?.toString() != "" ? this.dastEnd?.toString() : "";
+    this.readingLogDto = {
+      readerId: this.readingLogModel.reader_id,
+      bookId: this.readingLogModel.book_id,
+      ReadingStart : this.readingLogModel.reading_start,
+      ReadingEnd: this.readingLogModel.reading_end
+    }
+    debugger;
+    this.addReadingLogSubscription = this.readingLogService.addreadinglog(this.readingLogDto)
       .subscribe({
         next: (response) => {
           debugger;
