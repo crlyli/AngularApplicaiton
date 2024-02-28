@@ -46,7 +46,6 @@ I want to add an Apex graph showing the number of books read in each year. Again
 Lessons Learned:
 Always take notes!! I learned a lot during this project. I had no idea how to set my project up to use the repository pattern. But I did it! At one point I read about using a Generic Repository but thought it was to complicated.
 As I was working on setting up the database layer, it occurred to me why using Generics would be useful. A lightbulb flipped and how to set up the repositories using Generics finally made sense. Considering this is a project I just 
-threw together to help solidify certain concepts related to my last work project, I do not know of many things I would do differently. Add something here or there yes. A huge lesson I learned is, I am no longer a Junior developer. 
-I am able to take on a project, take into consideration design patterns, Object Oriented Principles and SOLID principles and excel. 
+threw together to help solidify certain concepts related to my last work project, I do not know of many things I would do differently. Add something here or there yes. I am able to take on a project, take into consideration design patterns, Object Oriented Principles and SOLID principles and excel. 
 
 
