@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\angularaspcore.client\angularaspcore.client.esproj">
+    <ProjectReference Include="..\angularaspcore.client\AngularAspCore.Client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="..\AngularAspCore.Database\AngularAspCore.Database.csproj" />

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ReadingLogDataModel } from 'src/app/model/reading_log.model';
-import { ReadingLogService } from 'src/app/services/api-service/reading-log.service';
+import { ReadingLogService } from 'src/app/services/api-service/reading-log-service/reading-log.service';
 import { Subscription } from 'rxjs';
 import { MatSelectionList } from '@angular/material/list';
 
@@ -15,18 +15,18 @@ export class AppReadingLogListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
       this.getReadingLogList();
   }
-  private addReadingLogSubscription?: Subscription;   
-    
+  private addReadingLogSubscription?: Subscription;
+
   getReadingLogList(){
     this.addReadingLogSubscription = this.readingLogService.getreadinglogs().subscribe(response =>
       {
         debugger;
         this.readingLogList = response;
       }
-    );  
+    );
   };
-  
-  OnDeleteSelected(id:string) {    
+
+  OnDeleteSelected(id:string) {
     this.addReadingLogSubscription = this.readingLogService.deletereadinglog(id).subscribe(response =>
       {
         this.getReadingLogList()

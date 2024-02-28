@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ReadingLogDataModel } from 'src/app/model/reading_log.model';
-import { ReadingLogService } from 'src/app/services/api-service/reading-log.service';
+import { ReadingLogService } from 'src/app/services/api-service/reading-log-service/reading-log.service';
 import { ReaderDataModel } from 'src/app/model/reader.model';
 import { BookDataModel } from 'src/app/model/book.model';
-import { ReaderService } from 'src/app/services/api-service/reader.service';
-import { BookService } from 'src/app/services/api-service/book.service';
+import { ReaderService } from 'src/app/services/api-service/reader-service/reader.service';
+import { BookService } from 'src/app/services/api-service/book-service/book.service';
 import { DatePipe } from '@angular/common';
 import { ReadingLogDtoModel } from 'src/app/model/reading_log_dto.model';
 
@@ -66,7 +66,6 @@ export class AppAddReadingLogComponent implements OnInit{
       ReadingStart : this.readingLogModel.reading_start,
       ReadingEnd: this.readingLogModel.reading_end
     }
-    debugger;
     this.addReadingLogSubscription = this.readingLogService.addreadinglog(this.readingLogDto)
       .subscribe({
         next: (response) => {

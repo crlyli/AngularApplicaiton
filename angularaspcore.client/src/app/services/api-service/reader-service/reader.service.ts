@@ -13,21 +13,21 @@ export interface FoodListModelServerResponse {
 })
 export class ReaderService {
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
   }
 
-  apiBaseUrl = environment.apiBaseUrl;
+  static readonly apiBaseUrl = environment.apiBaseUrl;
   readerdata = []
   getReaders(): Observable<ReaderDataModel[]> {
-    return this.http.get<ReaderDataModel[]>(`${this.apiBaseUrl}/Reader`)
+    return this.http.get<ReaderDataModel[]>(`${ReaderService.apiBaseUrl}/Reader`)
   };
 
   addReaders(model: ReaderDataModel): Observable<void> {
-  return this.http.post<void>(`${this.apiBaseUrl}/Reader`, model)
+  return this.http.post<void>(`${ReaderService.apiBaseUrl}/Reader`, model)
   };
-  
+
   deleteReaders(id:string): Observable<void> {
-    return this.http.delete<void>(`${this.apiBaseUrl}/Reader` + `/` + id)
+    return this.http.delete<void>(`${ReaderService.apiBaseUrl}/Reader` + `/` + id)
     };
 
 }

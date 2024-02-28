@@ -5,11 +5,11 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngularAspCore.Server", "AngularAspCore.Server\AngularAspCore.Server.csproj", "{80E60842-979C-47BF-9088-4AF6B25D3C42}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "angularaspcore.client", "angularaspcore.client\angularaspcore.client.esproj", "{98705DC4-14A8-4E7F-B112-710511DACAA4}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "AngularAspCore.Client", "angularaspcore.client\AngularAspCore.Client.esproj", "{98705DC4-14A8-4E7F-B112-710511DACAA4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngularAspCore.Database", "AngularAspCore.Database\AngularAspCore.Database.csproj", "{4A03B2F9-12F2-47AB-9DE6-69B69D5BE19F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularAspCore.UnitTest", "AngularAspCore.UnitTest\AngularAspCore.UnitTest.csproj", "{6FCE6D3D-651E-4C39-B9E5-579CEBD40C20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngularAspCore.UnitTest", "AngularAspCore.UnitTest\AngularAspCore.UnitTest.csproj", "{6FCE6D3D-651E-4C39-B9E5-579CEBD40C20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { BookService } from 'src/app/services/api-service/book.service';
+import { BookService } from 'src/app/services/api-service/book-service/book.service';
 import { BookDataModel } from 'src/app/model/book.model';
 import { Subscription } from 'rxjs';
 
@@ -24,7 +24,7 @@ export class AppAddBookComponent implements OnDestroy{
   }
 
   onFormSubmit()
-  { 
+  {
     this.addBookSubscription = this.postService.addBook(this.model)
       .subscribe({
         next: (response) => {

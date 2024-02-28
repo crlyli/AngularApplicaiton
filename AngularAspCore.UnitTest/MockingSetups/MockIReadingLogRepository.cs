@@ -1,11 +1,6 @@
 ﻿using AngularAspCore.Database.Data.Models;
 using AngularAspCore.Database.Repositories.Interface;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AngularAspCore.UnitTest.MockingSetups
 {

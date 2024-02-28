@@ -17,6 +17,7 @@ export class BookService {
   getBooks(): Observable<BookDataModel[]> {
     return this.http.get<any[]>(`${BookService.apiBaseUrl}/Books`)
   };
+
   getBookById(id:string): Observable<BookDataModel[]> {
     return this.http.get<any[]>(`${BookService.apiBaseUrl}/Books`)
   };

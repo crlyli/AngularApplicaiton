@@ -1,13 +1,6 @@
 ﻿using AngularAspCore.Database.Data.Models;
-using AngularAspCore.Database.Repositories.Implementation;
 using AngularAspCore.Database.Repositories.Interface;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace AngularAspCore.UnitTest.MockingSetups
 {
@@ -21,7 +14,7 @@ namespace AngularAspCore.UnitTest.MockingSetups
                     new ReaderDataModel
                     {
                         Id = 1,
-                    FullName = "MyFullName"
+                        FullName = "MyFullName"
                     },
                 }.AsEnumerable();
 
