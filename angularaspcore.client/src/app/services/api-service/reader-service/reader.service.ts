@@ -22,12 +22,12 @@ export class ReaderService {
     return this.http.get<ReaderDataModel[]>(`${ReaderService.apiBaseUrl}/Reader`)
   };
 
-  addReaders(model: ReaderDataModel): Observable<void> {
-  return this.http.post<void>(`${ReaderService.apiBaseUrl}/Reader`, model)
+  addReaders(model: ReaderDataModel): Observable<ReaderDataModel> {
+  return this.http.post<ReaderDataModel>(`${ReaderService.apiBaseUrl}/Reader`, model)
   };
 
-  deleteReaders(id:string): Observable<void> {
-    return this.http.delete<void>(`${ReaderService.apiBaseUrl}/Reader` + `/` + id)
+  deleteReaders(id:string): Observable<number> {
+    return this.http.delete<number>(`${ReaderService.apiBaseUrl}/Reader` + `/` + id)
     };
 
 }

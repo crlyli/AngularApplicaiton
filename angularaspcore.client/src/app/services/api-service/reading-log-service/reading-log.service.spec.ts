@@ -18,7 +18,7 @@ describe('ReadingLogService', () => {
       book_id: {
         id:1,
         title: "A Book Title",
-        decription: "A book description",
+        description: "A book description",
         author: "First Last"
       },
       reading_start: new Date()
@@ -31,7 +31,7 @@ describe('ReadingLogService', () => {
       book_id: {
         id:1,
         title: "A Book Title Two",
-        decription: "A book description Two",
+        description: "A book description Two",
         author: "FirstTwo LastTwo"
       },
       reading_start: new Date()
@@ -45,6 +45,12 @@ describe('ReadingLogService', () => {
     });
     service = TestBed.inject(ReadingLogService);
     httpTestingController = TestBed.inject(HttpTestingController);
+  });
+
+  //No request remain outstanding
+  afterEach(() => {
+    // After every test, assert that there are no more pending requests.
+    httpTestingController.verify();
   });
 
   it('should be created', () => {
@@ -81,4 +87,55 @@ describe('ReadingLogService', () => {
 
     mockHttp.flush("error request", { status: 401, statusText: 'Unathorized access' });
   });
+
+  it('delete should make a DELETE HTTP request with id appended to end of url', () => {
+    //Arrange
+    const id = '1';
+
+    //Act
+    service.deletereadinglog(id).subscribe(res => {
+
+    //Assert
+      expect(res).toBe(1);
+     });
+
+    const mockHttp = httpTestingController.expectOne(`${ReadingLogService.apiBaseUrl}/ReadingLog/1`, 'delete to api');
+    expect(mockHttp.request.method).toBe('DELETE');
+    expect(mockHttp.cancelled).toBeFalsy();
+    expect(mockHttp.request.responseType).toEqual('json');
+    mockHttp.flush(1);
+   });
+
+   it('create should make a POST HTTP request with resource as body', () => {
+    //Arrange
+    const createObj = {
+      readerId: {
+        id: 2,
+        fullName: "FirstTwo LastTwo"
+      },
+      bookId: {
+        id:1,
+        title: "A Book Title Two",
+        description: "A book description Two",
+        author: "FirstTwo LastTwo"
+      },
+      ReadingStart: new Date().toString(),
+      ReadingEnd: undefined
+    }
+
+    //Act
+    service.addreadinglog(createObj).subscribe(data => {
+    //Assert
+      expect(data.readerId.fullName).toBe(createObj.readerId.fullName);
+     });
+
+    const req = httpTestingController.expectOne(`${ReadingLogService.apiBaseUrl}/ReadingLog`, 'post to api');
+
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toBe(createObj);
+    expect(req.cancelled).toBeFalsy();
+    expect(req.request.responseType).toEqual('json');
+
+    req.flush(createObj);
+    });
 });

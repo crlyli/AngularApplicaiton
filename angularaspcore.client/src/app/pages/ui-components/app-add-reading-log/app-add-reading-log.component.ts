@@ -49,6 +49,7 @@ export class AppAddReadingLogComponent implements OnInit{
       reading_start: this.dateStart.toString(),
       reading_end: ""
     }
+
     this.getReaderList();
     this.getBookList();
   }

@@ -16,20 +16,22 @@ export class ReadingLogService {
 
   static readonly apiBaseUrl = environment.apiBaseUrl;
   bookdata = []
+
   getreadinglog(): Observable<ReadingLogDataModel> {
     return this.http.get<any>(`${ReaderService.apiBaseUrl}/ReadingLog`)
   };
+
   getreadinglogs(): Observable<ReadingLogDataModel[]> {
     return this.http.get<any[]>(`${ReaderService.apiBaseUrl}/ReadingLog`)
   };
 
-  addreadinglog(model: ReadingLogDtoModel): Observable<void> {
+  addreadinglog(model: ReadingLogDtoModel): Observable<ReadingLogDtoModel> {
     debugger;
-  return this.http.post<void>(`${ReaderService.apiBaseUrl}/ReadingLog`, model)
+  return this.http.post<ReadingLogDtoModel>(`${ReaderService.apiBaseUrl}/ReadingLog`, model)
   };
 
-  deletereadinglog(id:string): Observable<void> {
-    return this.http.delete<void>(`${ReaderService.apiBaseUrl}/ReadingLog` + `/` + id)
+  deletereadinglog(id:string): Observable<number> {
+    return this.http.delete<number>(`${ReaderService.apiBaseUrl}/ReadingLog` + `/` + id)
     };
 
 }

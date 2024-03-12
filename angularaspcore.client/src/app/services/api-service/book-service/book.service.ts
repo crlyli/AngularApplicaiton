@@ -18,16 +18,12 @@ export class BookService {
     return this.http.get<any[]>(`${BookService.apiBaseUrl}/Books`)
   };
 
-  getBookById(id:string): Observable<BookDataModel[]> {
-    return this.http.get<any[]>(`${BookService.apiBaseUrl}/Books`)
+  addBook(model: BookDataModel): Observable<BookDataModel> {
+  return this.http.post<BookDataModel>(`${BookService.apiBaseUrl}/Books`, model)
   };
 
-  addBook(model: BookDataModel): Observable<void> {
-  return this.http.post<void>(`${BookService.apiBaseUrl}/Books`, model)
-  };
-
-  deleteBook(id:string): Observable<void> {
-    return this.http.delete<void>(`${BookService.apiBaseUrl}/Books` + `/` + id)
+  deleteBook(id:string): Observable<number> {
+    return this.http.delete<number>(`${BookService.apiBaseUrl}/Books` + `/` + id)
     };
 
 }
